@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Créer un compte</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Inscription</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <!-- Email Field -->
+        <ion-item
+          [class.invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+        >
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-text
+          *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+          color="danger"
+        >
+          <p>Email invalide ou manquant</p>
+        </ion-text>
+
+        <!-- Password Field -->
+        <ion-item
+          [class.invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+        >
+          <ion-label position="floating">Mot de passe</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-text
+          *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+          color="danger"
+        >
+          <p>
+            Le mot de passe est requis et doit comporter au moins 6 caractères
+          </p>
+        </ion-text>
+
+        <!-- Submit Button -->
+        <ion-button
+          expand="full"
+          color="dark"
+          type="submit"
+          [disabled]="registerForm.invalid"
+        >
+          S'inscrire
+        </ion-button>
+
+        <!-- Navigation to Login -->
+        <ion-button expand="full" color="medium" (click)="navigateToLogin()">
+          Retour à la connexion
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
