@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PhotosService } from '../widgets/photos/photos.service';
+import { IPhoto } from '../widgets/photos/photos.service';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +10,18 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(public photoService :PhotosService) {}
+
+  async ngOnInit() {
+    await this.photoService.loadSaved('test');
+  }
+
+  addPhotoToGallery() {
+    this.photoService.addNewToGallery('test',50);
+  }
+
+  deletePhoto(photo:IPhoto){
+    this.photoService.deletePhoto(photo.filepath,'test')
+  }
 
 }
